@@ -65,7 +65,7 @@ int main() {
             pick_num[i] = 0;
             pick_num[i] = number_recommendation[rand()%40];
             int j = i-1;
-            while (j > 0) {
+            while (j >= 0) {
                 if (pick_num[i] == pick_num[j]) {goto SKIP;}
                 j--;
             }
