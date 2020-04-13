@@ -1,13 +1,27 @@
-#Power Ball Fun
+# Power Ball Fun
 
+## What is this?
+Just a lazy Sunday evening 1 hour effort. Wanted some software to give a recommendation while playing the CA powerball lottery. But did not want that recommendation to be a random pick kind of dump one also .. hmm.. so this was born :) 
+
+pb_data.txt - is the actual results from 2010 for the CA powerball. 
+analyze - Gives some data from the pb_data.txt
+pick - uses the pick.txt for the top numbers picked from last 10 years and uses some hard coded checks to give the recommendation. 
+
+NB: Software is not optimized. Its a really dirty coding.
+
+## How to use
+### Compile : 
 * gcc analyze.c -o analyze
+* gcc pick.c -o pick
+
+### Run
 * ./analyze
 * Copy the numbers under
   "*******Recommendation pick.txt"
 * pick.txt format
   11x5 (55 numbers)
 
-Example:
+Example pick.txt:
 ```
 23 32 41 20 28
 39 59 12 10 14
@@ -21,4 +35,6 @@ Example:
 11 18 19 15 3
 7 17 10 12 21
 ```
-* gcc pick.c -o pick
+* ./pick 
+
+
