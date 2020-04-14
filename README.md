@@ -1,13 +1,13 @@
 # Power Ball Fun
 
 ## What is this?
-Just a lazy Sunday evening 1 hour effort. Wanted some software to give a recommendation while playing the CA powerball lottery. But did not want that recommendation to be a random pick kind of dump one also .. hmm.. so this was born :)
+Just a lazy Sunday evening 1 hour effort. Wanted some software to give recommendation while playing the CA PowerBall lottery. But did not want that recommendation to be a random pick kind of dump one also .. hmm.. so this was born :)
 
-pb_data.txt - is the actual results from 2010 for the CA powerball.
+pb_data.txt - is the actual results from 2010 for the CA PowerBall.
 analyze - Gives some data from the pb_data.txt
 pick - uses the pick.txt for the top numbers picked from last 10 years and uses some hard coded checks to give the recommendation.
 
-NB: Software is not optimized. Its a really dirty coding.
+NB: Software is not optimized. Its a bit of dirty coding :)
 
 ## How to use
 ### Compile :

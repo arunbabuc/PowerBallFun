@@ -42,17 +42,16 @@ int main() {
         exit(1);
     int numbers[LINE_NUM_COUNT];
     int pb;
+    // Read the file and get the info to array
     while ((read = getline(&line, &len, fp)) != -1) {
-        // init local
+        // init local temp array
         for (int i=0; i < LINE_NUM_COUNT; i++) { numbers[i] = 0;}
         pb = 0;
 
-        // read
+        // read line by line
         if( ( status = sscanf( line, "%d %d %d %d %d %d", &numbers[0], &numbers[1], &numbers[2], &numbers[3], &numbers[4], &pb ) ) > 0 ) {
-            //printf("\n %d-%d-%d-%d-%d : pb-%d", numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], pb);
             number_read++;
         }
-        //printf("==> %s", line);
         data_count++;
 
         //Calculations - numbers

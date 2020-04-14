@@ -9,8 +9,10 @@
 #define LINE_NUM_COUNT 5
 #define ODD_EVEN_1  3
 #define FH_SH_1 3
-#define SUM_LIMIT 150
-
+#define SUM_LIMIT_MIN 50
+#define SUM_LIMIT_MAX 150
+#define SLEEPTIME_FOR_RAND 1
+#define HALF_NUM 35
 
 int number_recommendation[NUM_PICK_SELECT];
 int pb_recommendation[PB_PICK_SELECT];
@@ -33,7 +35,6 @@ int main() {
 
         // read
         if( ( status = sscanf( line, "%d %d %d %d %d", &numbers[0], &numbers[1], &numbers[2], &numbers[3], &numbers[4] ) ) > 0 ) {
-            //printf("\n %d-%d-%d-%d-%d : pb-%d", numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], pb);
             line_read++;
         }
         if (line_count < (NUM_PICK_SELECT/LINE_NUM_COUNT)) {
@@ -48,19 +49,7 @@ int main() {
 
         line_count++;
     }
-    /* Debug
-    for (int i = 0; i < 40; ) {
-        for (int j = 0; j < 5 ; j++, i++) {
-            printf("%d ", number_recommendation[i]);
-        }
-        printf("\n");
-    }
-    for (int i = 0; i < 15; ) {
-        for (int j = 0; j < 5 ; j++, i++) {
-            printf("%d ", pb_recommendation[i]);
-        }
-        printf("\n");
-    } */
+
     int pick_count = 0;
     int pick_num[LINE_NUM_COUNT];
     int pick_pb;
@@ -84,12 +73,12 @@ int main() {
         for(int i = 0;i < LINE_NUM_COUNT; i++){
             if (pick_num[i]%2) { odd++; }
             else { even++; }
-            if (pick_num[i] <= 35) { fh++; }
+            if (pick_num[i] <= HALF_NUM) { fh++; }
             else { sh++; }
             sum += pick_num[i];
         }
 
-        if ((odd == ODD_EVEN_1 || even == ODD_EVEN_1) && (fh == FH_SH_1 || sh == FH_SH_1) && (sum > 50 && sum < SUM_LIMIT)) {
+        if ((odd == ODD_EVEN_1 || even == ODD_EVEN_1) && (fh == FH_SH_1 || sh == FH_SH_1) && (sum > SUM_LIMIT_MIN && sum < SUM_LIMIT_MAX)) {
             pick_count++;
             srand((unsigned)time(&t));
             pick_pb = pb_recommendation[rand()%PB_PICK_SELECT];
@@ -100,7 +89,7 @@ int main() {
             printf("PB: %d", pick_pb);
         }
 SKIP:
-        sleep(1);
+        sleep(SLEEPTIME_FOR_RAND);
     }
     printf("\n");
 
