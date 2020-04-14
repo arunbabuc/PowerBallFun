@@ -2,25 +2,33 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define TOTAL_NUM_RANGE 70
+#define PB_RANGE 27
+#define RECOMMEND_NUM 45
+#define RECOMMEND_PB 15
+#define LINE_NUM_COUNT 5
+#define HALF_NUM 35
+#define COMBINATIONS_DISTR 6
+
 // global
 int data_count, number_read;
 // first 5 numbers
-int num_freq[70];
-int num_even_x_odd_y[6];
-int num_first_second_half[6];
+int num_freq[TOTAL_NUM_RANGE];
+int num_even_x_odd_y[COMBINATIONS_DISTR];
+int num_first_second_half[COMBINATIONS_DISTR];
 int num_top10[10];
 int total[8];
 
 // power ball
-int pb_freq[27];
+int pb_freq[PB_RANGE];
 int pb_even;
 int pb_odd;
 int pb_first_half;
 int pb_sec_half;
 int pb_top10[10];
 
-int recommend[40];
-int pb_recommend[15];
+int recommend[RECOMMEND_NUM];
+int pb_recommend[RECOMMEND_PB];
 
 int main() {
     FILE * fp;
@@ -32,11 +40,11 @@ int main() {
     fp = fopen("pb_data.txt", "r");
     if (fp == NULL)
         exit(1);
-    int numbers[5];
+    int numbers[LINE_NUM_COUNT];
     int pb;
     while ((read = getline(&line, &len, fp)) != -1) {
         // init local
-        for (int i=0; i < 5; i++) { numbers[i] = 0;}
+        for (int i=0; i < LINE_NUM_COUNT; i++) { numbers[i] = 0;}
         pb = 0;
 
         // read
@@ -53,12 +61,12 @@ int main() {
         f_half = 0;
         s_half = 0;
         sum = 0;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < LINE_NUM_COUNT; i++) {
             num_freq[numbers[i]]++;
             sum += numbers[i];
             if (numbers[i]%2) {odd++;}
             if (!(numbers[i]%2)) {even++;}
-            if (numbers[i] <= 35) {
+            if (numbers[i] <= HALF_NUM) {
                 f_half++;
             } else {
                 s_half++;
@@ -91,11 +99,11 @@ int main() {
 
     // Find top count
     int top_freq = 0;
-    for (int i = 0; i < 70; i++) {
+    for (int i = 0; i < TOTAL_NUM_RANGE; i++) {
         if (num_freq[i] > top_freq) { top_freq = num_freq[i];}
     }
 
-    printf ("\n############# 5 numbers(1-69) #############\n ");
+    printf ("\n############# 5 numbers(1-%d) #############\n ", TOTAL_NUM_RANGE-1);
 
     printf ("\nStart========Freq Distribution ===========\n");
     int temp_count = 0;
@@ -104,16 +112,16 @@ int main() {
     for (int top_cnt = top_freq; top_cnt > 0; top_cnt--) {
 
         temp_count = 0;
-        for (int i = 0; i < 70; i++) {
+        for (int i = 0; i < TOTAL_NUM_RANGE; i++) {
             if (num_freq[i] == top_cnt) { temp_count++;}
         }
         if (temp_count) {
             printf ("%d     :", top_cnt);
         }
-        for (int i = 0; i < 70; i++) {
+        for (int i = 0; i < TOTAL_NUM_RANGE; i++) {
             if (num_freq[i] == top_cnt) {
                 printf(" %d", i);
-                if (recommend_count < 40) {recommend[recommend_count] = i; recommend_count++;}
+                if (recommend_count < RECOMMEND_NUM) {recommend[recommend_count] = i; recommend_count++;}
             }
         }
         if (temp_count) {
@@ -129,20 +137,20 @@ int main() {
     printf ("End==========Sum Distribution ===========\n");
 
     printf ("\nStart========Even-Odd Distrn ===========\n");
-    for (int i = 0; i < 6; i++) {
-        printf ("%d even %d Odd : %d\n", i, 5-i, num_even_x_odd_y[i]);
+    for (int i = 0; i < COMBINATIONS_DISTR; i++) {
+        printf ("%d even %d Odd : %d\n", i, LINE_NUM_COUNT-i, num_even_x_odd_y[i]);
     }
     printf ("End==========Even-Odd Distrn ===========\n");
 
     printf ("\nStart========Value Distrn ===========");
-    for (int i = 0; i < 6; i++) {
-        printf (" \n%d First half %d Second half : %d ", i, 5-i, num_first_second_half[i]);
+    for (int i = 0; i < COMBINATIONS_DISTR; i++) {
+        printf (" \n%d First half %d Second half : %d ", i, LINE_NUM_COUNT-i, num_first_second_half[i]);
     }
     printf ("\nEnd==========Value Distrn ===========\n");
 
-    printf ("\n############# PowerBall(1-26) #############\n ");
+    printf ("\n############# PowerBall(1-%d) #############\n ", PB_RANGE-1);
     int pb_top_freq = 0;
-    for (int i = 0; i < 27; i++) {
+    for (int i = 0; i < PB_RANGE; i++) {
         if (pb_freq[i] > pb_top_freq) { pb_top_freq = pb_freq[i];}
     }
     printf ("\nStart========PB Freq Distribution ===========\n");
@@ -152,23 +160,22 @@ int main() {
     for (int top_cnt = pb_top_freq; top_cnt > 0; top_cnt--) {
 
         pb_temp_count = 0;
-        for (int i = 0; i < 27; i++) {
+        for (int i = 0; i < PB_RANGE; i++) {
             if (pb_freq[i] == top_cnt) { pb_temp_count++;}
         }
         if (pb_temp_count) {
             printf ("%d     :", top_cnt);
         }
-        for (int i = 0; i < 27; i++) {
+        for (int i = 0; i < PB_RANGE; i++) {
             if (pb_freq[i] == top_cnt) {
                 printf(" %d", i);
-                if (pb_recommend_count < 15) {pb_recommend[pb_recommend_count] = i; pb_recommend_count++;}
+                if (pb_recommend_count < RECOMMEND_PB) {pb_recommend[pb_recommend_count] = i; pb_recommend_count++;}
               }
         }
         if (pb_temp_count) {
             printf("\n");
         }
     }
-    printf("\n*******Recommendation pick.txt \n");
 
     printf ("End==========PB Freq Distribution ===========\n");
 
@@ -183,14 +190,14 @@ int main() {
     printf ("End==========PB Value Distrn ===========\n");
 
     printf("\n\n*******Recommendation pick.txt \n");
-    for (int i = 0; i < 40; ) {
-        for (int j = 0; j < 5 ; j++, i++) {
+    for (int i = 0; i < RECOMMEND_NUM; ) {
+        for (int j = 0; j < LINE_NUM_COUNT ; j++, i++) {
             printf("%d ", recommend[i]);
         }
         printf("\n");
     }
-    for (int i = 0; i < 15; ) {
-        for (int j = 0; j < 5 ; j++, i++) {
+    for (int i = 0; i < RECOMMEND_PB; ) {
+        for (int j = 0; j < LINE_NUM_COUNT ; j++, i++) {
             printf("%d ", pb_recommend[i]);
         }
         printf("\n");
