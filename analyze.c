@@ -9,6 +9,8 @@
 #define LINE_NUM_COUNT 5
 #define HALF_NUM 35
 #define COMBINATIONS_DISTR 6
+#define SUM_DISTRIBUTION 50
+#define TOTAL_SUM 350
 
 // global
 int data_count, number_read;
@@ -130,8 +132,8 @@ int main() {
     printf ("End==========Freq Distribution ===========\n");
 
     printf ("\nStart========Sum  Distribution ===========\n");
-    for (int i = 0; i < 7; i++) {
-        printf ("%d to %d  : %d\n", i*50, (i+1)*50, total[i]);
+    for (int i = 0; i < TOTAL_SUM/SUM_DISTRIBUTION; i++) {
+        printf ("%d to %d  : %d\n", i*SUM_DISTRIBUTION, (i+1)*SUM_DISTRIBUTION, total[i]);
     }
     printf ("End==========Sum Distribution ===========\n");
 
