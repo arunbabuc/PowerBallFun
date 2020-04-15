@@ -10,7 +10,7 @@
 #define ODD_EVEN_1  3
 #define FH_SH_1 3
 #define SUM_LIMIT_MIN 75
-#define SUM_LIMIT_MAX 150
+#define SUM_LIMIT_MAX 175
 #define SLEEPTIME_FOR_RAND 1
 #define HALF_NUM 35
 

@@ -9,7 +9,7 @@
 #define LINE_NUM_COUNT 5
 #define HALF_NUM 35
 #define COMBINATIONS_DISTR 6
-#define SUM_DISTRIBUTION 50
+#define SUM_DISTRIBUTION 25
 #define TOTAL_SUM 350
 
 // global
@@ -19,7 +19,7 @@ int num_freq[TOTAL_NUM_RANGE];
 int num_even_x_odd_y[COMBINATIONS_DISTR];
 int num_first_second_half[COMBINATIONS_DISTR];
 int num_top10[10];
-int total[8];
+int total[TOTAL_SUM/SUM_DISTRIBUTION+1];
 
 // power ball
 int pb_freq[PB_RANGE];
@@ -73,7 +73,7 @@ int main() {
                 s_half++;
             }
         }
-        total[(sum/50)-1]++;
+        total[(sum/SUM_DISTRIBUTION)-1]++;
 
         num_first_second_half[f_half]++;
         num_even_x_odd_y[even]++;
