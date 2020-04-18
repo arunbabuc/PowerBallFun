@@ -4,8 +4,7 @@
 
 #define TOTAL_NUM_RANGE 70
 #define PB_RANGE 27
-#define RECOMMEND_NUM 45
-#define RECOMMEND_PB 15
+#define RECOMMEND_NUM 60
 #define LINE_NUM_COUNT 5
 #define HALF_NUM 35
 #define COMBINATIONS_DISTR 6
@@ -30,7 +29,6 @@ int pb_sec_half;
 int pb_top10[10];
 
 int recommend[RECOMMEND_NUM];
-int pb_recommend[RECOMMEND_PB];
 
 int main() {
     FILE * fp;
@@ -167,12 +165,6 @@ int main() {
         if (pb_temp_count) {
             printf ("%d     :", top_cnt);
         }
-        for (int i = 0; i < PB_RANGE; i++) {
-            if (pb_freq[i] == top_cnt) {
-                printf(" %d", i);
-                if (pb_recommend_count < RECOMMEND_PB) {pb_recommend[pb_recommend_count] = i; pb_recommend_count++;}
-              }
-        }
         if (pb_temp_count) {
             printf("\n");
         }
@@ -194,12 +186,6 @@ int main() {
     for (int i = 0; i < RECOMMEND_NUM; ) {
         for (int j = 0; j < LINE_NUM_COUNT ; j++, i++) {
             printf("%d ", recommend[i]);
-        }
-        printf("\n");
-    }
-    for (int i = 0; i < RECOMMEND_PB; ) {
-        for (int j = 0; j < LINE_NUM_COUNT ; j++, i++) {
-            printf("%d ", pb_recommend[i]);
         }
         printf("\n");
     }

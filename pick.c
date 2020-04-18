@@ -4,8 +4,8 @@
 #include <time.h>
 #include <unistd.h>
 
-#define NUM_PICK_SELECT 45
-#define PB_PICK_SELECT 15
+#define NUM_PICK_SELECT 60
+#define PB_PICK_SELECT 28
 #define LINE_NUM_COUNT 5
 #define ODD_EVEN_1  3
 #define FH_SH_1 3
@@ -15,7 +15,6 @@
 #define HALF_NUM 35
 
 int number_recommendation[NUM_PICK_SELECT];
-int pb_recommendation[PB_PICK_SELECT];
 int main() {
     FILE * fp;
     char * line = NULL;
@@ -37,15 +36,10 @@ int main() {
         if( ( status = sscanf( line, "%d %d %d %d %d", &numbers[0], &numbers[1], &numbers[2], &numbers[3], &numbers[4] ) ) > 0 ) {
             line_read++;
         }
-        if (line_count < (NUM_PICK_SELECT/LINE_NUM_COUNT)) {
-            for (int i = 0; i < LINE_NUM_COUNT; i++) {
-                number_recommendation[num_cnt++] = numbers[i];
-            }
-        } else {
-          for (int i = 0; i < LINE_NUM_COUNT; i++) {
-              pb_recommendation[pb_count++] = numbers[i];
-          }
+        for (int i = 0; i < LINE_NUM_COUNT; i++) {
+            number_recommendation[num_cnt++] = numbers[i];
         }
+
 
         line_count++;
     }
@@ -81,7 +75,7 @@ int main() {
         if ((odd == ODD_EVEN_1 || even == ODD_EVEN_1) && (fh == FH_SH_1 || sh == FH_SH_1) && (sum > SUM_LIMIT_MIN && sum < SUM_LIMIT_MAX)) {
             pick_count++;
             srand((unsigned)time(&t));
-            pick_pb = pb_recommendation[rand()%PB_PICK_SELECT];
+            pick_pb = rand()%PB_PICK_SELECT;
             printf("\n");
             for (int i = 0; i < LINE_NUM_COUNT; i++) {
                 printf ("%d ", pick_num[i]);
